@@ -43,9 +43,10 @@ const filterTopRated = () => {
 </script>
 
 <template>
-  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 my-10 px-4">
-    <div class="flex items-center w-full sm:w-auto gap-2">
-      <span class="pi pi-search text-gray-500 text-xl"></span>
+  <div
+    class="flex flex-col sm:flex-row items-center justify-between gap-4 my-6 sm:my-10 px-2 sm:px-4"
+  >
+    <div class="flex flex-col sm:flex-row items-center w-full sm:w-auto gap-2">
       <input
         class="flex-1 sm:w-64 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
         type="text"
@@ -53,25 +54,30 @@ const filterTopRated = () => {
         placeholder="Search restaurants..."
       />
       <button
-        class="ml-2 px-4 py-2 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold shadow transition-colors duration-200"
+        class="mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold shadow transition-colors duration-200"
         @click="onSearch"
       >
         Search
       </button>
     </div>
-    <div>
+    <div class="w-full sm:w-auto mt-2 sm:mt-0 flex justify-end">
       <button
-        @click="filterTopRated" class="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold shadow transition-colors duration-200">
+        @click="filterTopRated"
+        class="w-full sm:w-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold shadow transition-colors duration-200"
+      >
         <span class="pi pi-star mr-2"></span>Top Rated Restaurant
       </button>
     </div>
   </div>
 
-  <div class="flex flex-wrap">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 sm:px-4"
+  >
     <RouterLink
       v-for="restaurant in filteredRest"
       :key="restaurant.info.id"
       :to="`/restaurants/${restaurant.info.id}`"
+      class="w-full flex justify-center"
     >
       <ResCard :resData="restaurant" />
     </RouterLink>

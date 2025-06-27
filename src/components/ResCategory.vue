@@ -22,13 +22,18 @@ function handleClick() {
 
 <template>
   <div>
-    <div class="w-6/12 bg-gray-50 shadow-lg p-4 mx-auto my-4">
-      <div class="flex justify-between cursor-pointer" @click="handleClick">
-        <p class="font-bold text-lg">
+    <div
+      class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 bg-gray-50 shadow-lg p-3 sm:p-4 mx-auto my-2 sm:my-4 rounded-xl"
+    >
+      <div
+        class="flex justify-between items-center cursor-pointer"
+        @click="handleClick"
+      >
+        <p class="font-bold text-base sm:text-lg">
           {{ data.title }} ({{ data.itemCards?.length || 0 }})
         </p>
         <p
-          class="transition-transform duration-200"
+          class="transition-transform duration-200 text-lg sm:text-xl"
           :class="{ 'rotate-180': showItems }"
         >
           ↓
