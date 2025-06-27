@@ -1,8 +1,10 @@
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 
 export const Store = defineStore("cart", () => {
-  const cart = ref<any[]>([]);
+  
+  const storedCart = localStorage.getItem("cart");
+  const cart = ref<any[]>(storedCart ? JSON.parse(storedCart) : []);
 
   const cartCount = computed(() => cart.value.length);
 
@@ -14,5 +16,20 @@ export const Store = defineStore("cart", () => {
     cart.value = [];
   }
 
-  return { cart, cartCount, addToCart, clearCart };
+  function clearItem(itemId: any) {
+    const index = cart.value.findIndex((item) => item.card?.info.id === itemId);
+    if (index !== -1) {
+      cart.value.splice(index, 1);
+    }
+  }
+
+  watch(
+    cart,
+    (newCart) => {
+      localStorage.setItem("cart", JSON.stringify(newCart));
+    },
+    { deep: true }
+  );
+
+  return { cart, cartCount, addToCart, clearCart, clearItem };
 });

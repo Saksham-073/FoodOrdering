@@ -36,8 +36,8 @@ onMounted(() => {
           <RouterLink to="/contact">Contact Us</RouterLink>
         </li>
         <li class="pr-8 pl-5">
-          <RouterLink to="/cart"
-            >Cart<span
+          <RouterLink to="/cart">Cart<span class="pi pi-shopping-cart ml-1"></span>
+            <span
               class="absolute top-6 right-30 bg-red-500 text-white text-xs rounded-full h-4 w-6 flex items-center justify-center"
             >
               {{ cartItems.cartCount }}

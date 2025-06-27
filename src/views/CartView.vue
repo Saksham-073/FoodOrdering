@@ -8,8 +8,8 @@ const handleClearCart = () => {
   store.clearCart();
 };
 
-const handleClearItem=()=>{
-    
+const handleClearItem=(itemId:any)=>{
+    store.clearItem(itemId);
 }
 </script>
 
@@ -37,7 +37,7 @@ const handleClearItem=()=>{
         v-for="(item, index) in store.cart"
         :key="item.card?.info?.id || index"
         class="mb-6 p-6 border border-gray-200 rounded-xl shadow-sm flex items-center gap-6 bg-gray-50 hover:shadow-md transition-shadow duration-200"
-      ><span @click="" class="cursor-pointer font-bold">x</span>
+      ><span @click="handleClearItem(item.card.info.id)" class="cursor-pointer font-bold">x</span>
         <img
           v-if="item.card.info.imageId"
           :src="CDN_URL + item.card.info.imageId"
