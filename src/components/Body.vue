@@ -48,6 +48,7 @@ const filterTopRated = () => {
   >
     <div class="flex flex-col sm:flex-row items-center w-full sm:w-auto gap-2">
       <input
+        @keyup.enter="onSearch"
         class="flex-1 sm:w-64 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
         type="text"
         v-model="searchText"
