@@ -26,7 +26,7 @@ function hideImage(e: Event) {
   <div>
     <div
       v-if="!items || !Array.isArray(items) || items.length === 0"
-      class="p-8 text-center text-gray-400 text-lg"
+      class="p-6 sm:p-8 text-center text-gray-400 text-base sm:text-lg"
     >
       No items available
     </div>
@@ -34,15 +34,15 @@ function hideImage(e: Event) {
       <div
         v-for="(item, index) in items"
         :key="item.card?.info?.id || index"
-        class="p-6 m-4 bg-white rounded-xl shadow-md border border-gray-100 flex justify-between items-center hover:shadow-lg transition-shadow duration-200"
+        class="p-4 sm:p-6 mb-6 sm:m-4 bg-white rounded-xl shadow-md border border-gray-100 flex flex-col md:flex-row justify-between items-center hover:shadow-lg transition-shadow duration-200"
       >
-        <div class="w-8/12">
-          <div class="py-1 flex items-center gap-2">
-            <span class="font-semibold text-blue-700">{{
+        <div class="w-full md:w-8/12 mb-2 md:mb-0">
+          <div class="py-1 flex flex-wrap items-center gap-2">
+            <span class="font-semibold text-blue-700 text-sm sm:text-base">{{
               item.card.info.category || "N/A"
             }}</span>
             <span class="text-gray-500">-</span>
-            <span class="text-lg font-bold text-green-700">
+            <span class="text-base sm:text-lg font-bold text-green-700">
               ₹{{
                 item.card.info.price
                   ? item.card.info.price / 100
@@ -52,20 +52,20 @@ function hideImage(e: Event) {
               }}
             </span>
           </div>
-          <p class="text-sm text-gray-500 mt-1">
+          <p class="text-xs sm:text-sm text-gray-500 mt-1">
             {{ item.card.info.description || "No description available" }}
           </p>
         </div>
-        <div class="w-4/12 flex flex-col items-center gap-2">
+        <div class="w-full md:w-4/12 flex flex-col items-center gap-2">
           <img
             v-if="item.card.info.imageId"
-            class="w-24 h-24 object-cover rounded-lg border border-gray-200 mb-2"
+            class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg border border-gray-200 mb-2"
             :src="CDN_URL + item.card.info.imageId"
             :alt="item.card.info.name || 'Food item'"
             @error="hideImage($event)"
           />
           <button
-            class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow transition-colors duration-200"
+            class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow transition-colors duration-200 text-sm sm:text-base"
             @click="handleAddItem(item)"
           >
             Add +

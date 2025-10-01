@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useRestaurantMenu } from "@/Utilities/UseRestaurantMenu";
 import RestaurantCategory from "@/components/ResCategory.vue";
 import Shimmer from "@/components/Shimmer.vue";
+import { useIsDesktop } from "@/Utilities/useIsDesktop";
 
 const route = useRoute();
-const resId = route.params.resId as string;
 
-const { resInfo, error, loading } = useRestaurantMenu(resId);
+const { resInfo, error, loading, fetchMenu } = useRestaurantMenu(() =>
+  Number.parseInt(route.params.resId as string)
+);
+
+const isDesktop = useIsDesktop();
 
 const showIndex = ref<number | null>(null);
 
@@ -27,14 +31,21 @@ const restaurantInfo = computed(() => {
 const categories = computed(() => {
   if (!resInfo.value) return [];
 
+  const cardId = isDesktop.value ? 4 : 5;
   const cats =
-    resInfo.value?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+    resInfo.value?.cards?.[
+      cardId
+    ]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
       (c: any) =>
         c.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     ) || [];
 
   return cats;
+});
+
+watch(isDesktop, () => {
+  fetchMenu();
 });
 
 const setShowIndex = (index: number | null) => {
