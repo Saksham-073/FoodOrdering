@@ -1,2 +1,117 @@
 @import "tailwindcss";
 
+/* Custom styles for mobile menu animations */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Smooth transitions for navigation links */
+.nav-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  transform: translateY(-1px);
+}
+
+/* Router Link Active States */
+.router-link-active {
+  color: #2563eb !important; /* text-blue-600 */
+  background-color: #eff6ff !important; /* bg-blue-50 */
+}
+
+/* Ensure active class overrides other styles */
+.router-link-active.text-blue-600 {
+  color: #2563eb !important;
+}
+
+.router-link-active.bg-blue-50 {
+  background-color: #eff6ff !important;
+}
+
+/* Mobile menu backdrop */
+.mobile-menu-backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar for mobile menu */
+.mobile-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Search bar enhancements */
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Restaurant card hover effects */
+.restaurant-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.restaurant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Responsive grid improvements */
+@media (max-width: 640px) {
+  .restaurant-grid {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .restaurant-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .restaurant-grid {
+    gap: 2rem;
+  }
+}

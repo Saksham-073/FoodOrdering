@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { CDN_URL } from "@/Utilities/Constants";
 import { Store } from "@/stores/Store";
+import { toast } from "vue3-toastify";
 
 const props = defineProps<{ items: any[] }>();
 const store = Store();
 
 function handleAddItem(item: any) {
   store.addToCart(item);
+  toast.success(`${item.card.info.name} added to cart!`, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
 }
 
 function hideImage(e: Event) {

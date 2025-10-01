@@ -1,16 +1,34 @@
 <script setup lang="ts">
 import { Store } from "@/stores/Store";
 import { CDN_URL } from "@/Utilities/Constants";
+import { toast } from "vue3-toastify";
 
 const store = Store();
 
 const handleClearCart = () => {
   store.clearCart();
+  toast.info("Cart cleared!", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
 };
 
-const handleClearItem=(itemId:any)=>{
-    store.clearItem(itemId);
-}
+const handleClearItem = (itemId: any) => {
+  const item = store.cart.find((cartItem) => cartItem.card.info.id === itemId);
+  store.clearItem(itemId);
+  if (item) {
+    toast.warning(`${item.card.info.name} removed from cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
+  }
+};
 </script>
 
 <template>
@@ -37,7 +55,12 @@ const handleClearItem=(itemId:any)=>{
         v-for="(item, index) in store.cart"
         :key="item.card?.info?.id || index"
         class="mb-6 p-6 border border-gray-200 rounded-xl shadow-sm flex items-center gap-6 bg-gray-50 hover:shadow-md transition-shadow duration-200"
-      ><span @click="handleClearItem(item.card.info.id)" class="cursor-pointer font-bold">x</span>
+      >
+        <span
+          @click="handleClearItem(item.card.info.id)"
+          class="cursor-pointer font-bold"
+          >x</span
+        >
         <img
           v-if="item.card.info.imageId"
           :src="CDN_URL + item.card.info.imageId"
